@@ -74,6 +74,12 @@ class Cylinder(Simple_figures):
             self.Ha2_nTl.append(self.Ha2[i] * math.pow(10,5))
             self.Za2_nTl.append(self.Za2[i] * math.pow(10,5))
 
+    def get_Ha2_nTl(self):
+        return self.Ha2_nTl
+
+    def get_Za2_nTl(self):
+        return self.Za2_nTl
+
     def get_cylinder_output(self):
         table_cylinder = pd.DataFrame({'Ha,gamma': self.Ha2,
                                       'Za, gamma': self.Za2,
@@ -102,6 +108,12 @@ class Cylinder_slanting_m(Simple_figures):
             self.Ha3_nTl.append(self.Ha3[i] * math.pow(10, 5))
             self.Za3_nTl.append(self.Za3[i] * math.pow(10, 5))
 
+    def get_Ha3_nTl(self):
+        return self.Ha3_nTl
+
+    def get_Za3_nTl(self):
+        return self.Za3_nTl
+
     def get_slanting_m(self):
         sl_cylinder = pd.DataFrame({'Ha,gamma': self.Ha3,
                                        'Za, gamma': self.Za3,
@@ -110,7 +122,7 @@ class Cylinder_slanting_m(Simple_figures):
         print sl_cylinder
 
 class Stock(Simple_figures):
-    '''solver direct problem for restricted vertical stock'''
+    '''solves direct problem for  '''
     def __init__(self, h, R, sigma, h1, a):
         Simple_figures.__init__(self, h)
         self.M1 = math.pi*R^2*sigma
@@ -128,6 +140,12 @@ class Stock(Simple_figures):
         for i in range(0, len(self.Ha4)):
             self.Ha4_nTl.append(self.Ha4[i] * math.pow(10, 5))
             self.Za4_nTl.append(self.Za4[i] * math.pow(10, 5))
+
+    def get_Ha4_nTl(self):
+        return self.Ha4_nTl
+
+    def get_Za4_nTl(self):
+        return self.Za4_nTl
 
     def get_stock(self):
         table_stock = pd.DataFrame({'Ha,gamma': self.Ha4,
@@ -171,7 +189,7 @@ def visualize(Ha,Za):
     pylab.plot(X, Ha, 'b', label='Ha, nTl')
     pylab.plot(X, Za, 'r', label='Za, nTl')
     pylab.legend(loc='upper right')
-    pylab.title(raw_input("Enter the title (figure's type)"))
+    pylab.title(raw_input("Enter the title for your graph (for instance copy figure's type)"))
     pylab.grid(True)
     pylab.show()
 
@@ -181,8 +199,8 @@ def visualize(Ha,Za):
 #test.get_sphere_output()
 #test.visualize_sphere()
 
-test2 = Stock_deep(50,40,0.21)
-test2.gamma_deep_stock()
-test2.nTl_deep_stock()
-test2.get_deep_stock()
-visualize(test2.get_Ha5_nTl(),test2.get_Za5_nTl())
+#test2 = Stock_deep(50,40,0.21)
+#test2.gamma_deep_stock()
+#test2.nTl_deep_stock()
+#test2.get_deep_stock()
+#visualize(test2.get_Ha5_nTl(),test2.get_Za5_nTl())
