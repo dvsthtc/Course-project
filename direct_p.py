@@ -45,7 +45,11 @@ class Sphere(Simple_figures):
 
 
     def visualize_sphere(self):
-        pylab.plot(np.polyval(self.X,self.Ha1))
+        pylab.plot(self.X,self.Ha1_nTl,'b', label='Ha, nTl')
+        pylab.plot(self.X,self.Za1_nTl, 'r', label='Za, nTl')
+        pylab.plot(self.X, self.Ta1_nTl, 'g', label='Ta, nTl')
+        pylab.legend(loc='upper right')
+        pylab.title('Ha, Za, Ta parameters for the uniformly magnetized sphere')
         pylab.grid(True)
         pylab.show()
 
@@ -149,12 +153,27 @@ class Stock_deep(Simple_figures):
             self.Ha5_nTl.append(self.Ha5[i] * math.pow(10, 5))
             self.Za5_nTl.append(self.Za5[i] * math.pow(10, 5))
 
+    def get_Ha5_nTl(self):
+        return self.Ha5_nTl
+
+    def get_Za5_nTl(self):
+        return self.Za5_nTl
+
     def get_deep_stock(self):
         deep_stock = pd.DataFrame({'Ha,gamma': self.Ha5,
                                     'Za, gamma': self.Za5,
                                     'Ha, nTl': self.Ha5_nTl,
                                     'Za, nTl': self.Za5_nTl}, index=self.X)
         print deep_stock
+
+def visualize(Ha,Za):
+    X = [-800, -400, -200, -100, -80, -60, -40, -20, -10, -5, 0, 5, 10, 20, 40, 60, 80, 100, 200, 400, 800]
+    pylab.plot(X, Ha, 'b', label='Ha, nTl')
+    pylab.plot(X, Za, 'r', label='Za, nTl')
+    pylab.legend(loc='upper right')
+    pylab.title(raw_input("Enter the title (figure's type)"))
+    pylab.grid(True)
+    pylab.show()
 
 #test = Sphere(50, 0.21, 40)
 #test.gamma_sphere()
@@ -166,3 +185,4 @@ test2 = Stock_deep(50,40,0.21)
 test2.gamma_deep_stock()
 test2.nTl_deep_stock()
 test2.get_deep_stock()
+visualize(test2.get_Ha5_nTl(),test2.get_Za5_nTl())
